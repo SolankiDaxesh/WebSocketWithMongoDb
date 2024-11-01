@@ -32,8 +32,12 @@ namespace WebSocket_Demo.Services
                     }
                     else
                     {
+                        var options = new JsonSerializerOptions
+                        {
+                            PropertyNameCaseInsensitive = true
+                        };
                         var receivedMessage = Encoding.UTF8.GetString(buffer, 0, result.Count);
-                        var locationUpdate = JsonSerializer.Deserialize<LocationUpdate>(receivedMessage);
+                        var locationUpdate = JsonSerializer.Deserialize<LocationUpdate>(receivedMessage,options);
 
                         if (locationUpdate != null)
                         {
